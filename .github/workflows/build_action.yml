@@ -1,0 +1,30 @@
+name: Go package
+
+on:
+  workflow_dispatch:
+    inputs:
+      go_version:
+        description: "Go SDK version"
+        required: true
+        default: "1.15"
+        type: string
+
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: $GO_VERSION
+
+      - name: Build
+        run: go build -v ./...
+
+      - name: Test
+        run: go test -v ./...
