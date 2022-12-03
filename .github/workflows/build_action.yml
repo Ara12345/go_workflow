@@ -21,14 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Go version"
-        run: echo "$GO_VERSION"
+        run: echo "${{inputs.go_version}}"
 
       - uses: actions/checkout@v3
 
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: $GO_VERSION
+          go-version: "${{inputs.go_version}}"
 
       - name: Build
         run: go build -v ./...
